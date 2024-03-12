@@ -1,0 +1,35 @@
+{
+	"name": "example-with-vitest",
+	"scripts": {
+		"dev": "vinxi dev",
+		"build": "vinxi build",
+		"start": "vinxi start",
+		"test": "vitest run",
+		"test-watch": "vitest",
+		"test-ui": "vitest --ui",
+		"coverage": "vitest run --coverage"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@solidjs/meta": "^0.29.3",
+		"@solidjs/router": "^0.12.4",
+		"@solidjs/start": "^0.6.0",
+		"@solidjs/testing-library": "^0.8.5",
+		"@testing-library/jest-dom": "^6.1.5",
+		"@testing-library/user-event": "^14.5.1",
+		"@vitest/ui": "^1.1.0",
+		"jsdom": "^24.0.0",
+		"sanitize.css": "^13.0.0",
+		"solid-js": "^1.8.15",
+		"typescript": "^5.3.3",
+		"vinxi": "0.3.4",
+		"vite": "^5.1.1",
+		"vite-plugin-solid": "~2.9.1",
+		"vitest": "^1.2.1",
+		"autoprefixer": "^10.4.18",
+		"postcss": "^8.4.35"
+	},
+	"dependencies": {
+		"tailwindcss": "^3.4.1"
+	}
+}
