@@ -13,6 +13,8 @@ type CommentsContextType = {
   setComments: (comments: TComment[]) => void;
   me: () => string;
   findComment: (id: string, comments: TComment[]) => TComment | undefined;
+  drawer: () => boolean;
+  setDrawer: (drawer: boolean) => void;
 };
 
 const CommentsContext = createContext<CommentsContextType>();
@@ -31,6 +33,7 @@ export function CommentsProvider(props: any) {
   const [comments, setComments] = createSignal<TComment[]>(
     props.initialComments || []
   );
+  const [drawer, setDrawer] = createSignal<boolean>(false); 
   const [me] = createSignal<string>(DATA.users[0]);
 
   const findComment = (
@@ -60,7 +63,7 @@ export function CommentsProvider(props: any) {
 
   return (
     <CommentsContext.Provider
-      value={{ comments, setComments, findComment, me }}
+      value={{ comments, setComments, findComment, me, drawer, setDrawer }}
     >
       {props.children}
     </CommentsContext.Provider>

@@ -1,10 +1,10 @@
-import { Avatar } from "~/components";
+import { Avatar, Modal } from "~/components";
 import { DeleteIcon, EditIcon, ReplyIcon } from "~/components/icons";
 import { useCommentsContext } from "~/context";
 import { TComment } from "~/types";
 
 export function CommentHeader({ comment }: { comment: TComment }) {
-  const { comments, setComments, me } = useCommentsContext();
+  const { comments, setComments, me, setDrawer } = useCommentsContext();
 
   const handleReply = () => {
     const newComments = comments().map((c) => {
@@ -50,41 +50,45 @@ export function CommentHeader({ comment }: { comment: TComment }) {
   };
 
   return (
-    <div class="flex gap-3 items-center justify-between">
-      <div class="flex gap-3 items-center">
-        <Avatar user={comment.author} />
+    <>
+      <div class="flex gap-3 items-center justify-between">
+        <div class="flex gap-3 items-center">
+          <Avatar user={comment.author} />
 
-        <span>{convertDateToHumanText()}</span>
-      </div>
-      {me() !== comment?.author ? (
-        <span
-          onClick={handleReply}
-          class={`text-blue-900 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
-            comment.isBeingReplied ? "opacity-50" : ""
-          }`}
-        >
-          <ReplyIcon /> Reply
-        </span>
-      ) : (
-        <div class="flex gap-4">
+          <span>{convertDateToHumanText()}</span>
+        </div>
+        {me() !== comment?.author ? (
           <span
-            onClick={() => {}}
-            class={`text-red-600 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
-              comment.isBeingReplied ? "opacity-50" : ""
-            }`}
-          >
-            <DeleteIcon /> Delete
-          </span>
-          <span
-            onClick={() => {}}
+            onClick={handleReply}
             class={`text-blue-900 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
               comment.isBeingReplied ? "opacity-50" : ""
             }`}
           >
-            <EditIcon /> Edit
+            <ReplyIcon /> Reply
           </span>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div class="flex gap-4">
+            <span
+              onClick={() => {setDrawer(true)}}
+              class={`text-red-600 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
+                comment.isBeingReplied ? "opacity-50" : ""
+              }`}
+            >
+              <DeleteIcon /> Delete
+            </span>
+            <span
+              onClick={() => {}}
+              class={`text-blue-900 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
+                comment.isBeingReplied ? "opacity-50" : ""
+              }`}
+            >
+              <EditIcon /> Edit
+            </span>
+          </div>
+        )}
+      </div>
+
+      
+    </>
   );
 }
