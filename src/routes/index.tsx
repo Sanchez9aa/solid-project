@@ -4,7 +4,7 @@ import "./index.css";
 
 export default function Home() {
 	return (
-		<main class="m-auto max-w-[1080px] pt-12 relative">
+		<main class="m-auto max-w-[1080px] pt-6 relative">
 			<CommentsProvider>
 				<CommentsSection />
 			</CommentsProvider>

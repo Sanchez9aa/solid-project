@@ -14,13 +14,16 @@ type TNewCommentProps = {
 export function NewComment({ isReply, id, className }: TNewCommentProps) {
   const { comments, setComments, me } = useCommentsContext();
 
+  console.log(DATA.users[Math.floor(Math.random() * DATA.users.length)]);
+
   const [textArea, setTextArea] = createSignal("");
 
   const handleSaveNewComment = () => {
     const comment: TComment = {
       id: generateRandomId(),
       likes: 0,
-      author: DATA.users[Math.floor(Math.random() * DATA.users.length)],
+      /* author: DATA.users[Math.floor(Math.random() * DATA.users.length)], */
+      author: me(),
       date: new Date(),
       content: textArea(),
       child: [],
@@ -36,7 +39,7 @@ export function NewComment({ isReply, id, className }: TNewCommentProps) {
     const comment: TComment = {
       id: generateRandomId(),
       likes: 0,
-      author: DATA.users[Math.floor(Math.random() * DATA.users.length)],
+      author: me(),
       date: new Date(),
       content: textArea(),
       child: [],

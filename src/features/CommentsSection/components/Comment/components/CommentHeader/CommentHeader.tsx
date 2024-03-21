@@ -1,10 +1,11 @@
-import { Avatar, Modal } from "~/components";
+import { Avatar } from "~/components";
 import { DeleteIcon, EditIcon, ReplyIcon } from "~/components/icons";
 import { useCommentsContext } from "~/context";
 import { TComment } from "~/types";
 
 export function CommentHeader({ comment }: { comment: TComment }) {
-  const { comments, setComments, me, setDrawer } = useCommentsContext();
+  const { comments, me, setComments, setDrawer, setSeletedComment } =
+    useCommentsContext();
 
   const handleReply = () => {
     const newComments = comments().map((c) => {
@@ -15,6 +16,11 @@ export function CommentHeader({ comment }: { comment: TComment }) {
     });
 
     setComments(newComments);
+  };
+
+  const handleOpenDrawer = () => {
+    setDrawer(true);
+    setSeletedComment(comment);
   };
 
   const convertDateToHumanText = () => {
@@ -54,6 +60,11 @@ export function CommentHeader({ comment }: { comment: TComment }) {
       <div class="flex gap-3 items-center justify-between">
         <div class="flex gap-3 items-center">
           <Avatar user={comment.author} />
+          {comment.author === me() && (
+            <span class="bg-blue-800 text-white px-2">
+              tu
+            </span>
+          )}
 
           <span>{convertDateToHumanText()}</span>
         </div>
@@ -69,7 +80,7 @@ export function CommentHeader({ comment }: { comment: TComment }) {
         ) : (
           <div class="flex gap-4">
             <span
-              onClick={() => {setDrawer(true)}}
+              onClick={handleOpenDrawer}
               class={`text-red-600 cursor-pointer justify-end flex items-center gap-2 hover:opacity-50 ${
                 comment.isBeingReplied ? "opacity-50" : ""
               }`}
@@ -87,8 +98,6 @@ export function CommentHeader({ comment }: { comment: TComment }) {
           </div>
         )}
       </div>
-
-      
     </>
   );
 }
